@@ -3,9 +3,10 @@
 		https://docs.microsoft.com/en-US/visualstudio/msbuild/walkthrough-creating-an-msbuild-project-file-from-scratch?view=vs-2019
 	-->
 	<PropertyGroup>
+		<Configuration Condition="'$(Configuration)' == ''">Debug</OutputPath>
+		<OutputPath Condition="'$(OutputPath)' == ''">bin/$(Configuration)</OutputPath>
 		<OutputType>Library</OutputType>
 		<AssemblyName>network.dll</AssemblyName>
-		<OutputDirectory>bin</OutputDirectory>
 	</PropertyGroup>
 	<ItemGroup>
 		<Compile Include="src/*.cs" />
@@ -16,7 +17,7 @@
 			ToolPath="$(CscToolPath)"
 			Sources="@(Compile)"
 			TargetType="$(OutputType)"
-			OutputAssembly="$(OutputDirectory)/$(AssemblyName)"
+			OutputAssembly="$(OutputPath)/$(AssemblyName)"
 		/>
 	</Target>
 </Project>
