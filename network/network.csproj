@@ -1,0 +1,22 @@
+<Project ToolsVersion="15.9" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<!--
+		https://docs.microsoft.com/en-US/visualstudio/msbuild/walkthrough-creating-an-msbuild-project-file-from-scratch?view=vs-2019
+	-->
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<AssemblyName>network.dll</AssemblyName>
+		<OutputDirectory>bin</OutputDirectory>
+	</PropertyGroup>
+	<ItemGroup>
+		<Compile Include="src/*.cs" />
+	</ItemGroup>
+	<Target Name="Build">
+		<MakeDir Directories="$(OutputDirectory)"/>
+		<Csc
+			ToolPath="$(CscToolPath)"
+			Sources="@(Compile)"
+			TargetType="$(OutputType)"
+			OutputAssembly="$(OutputDirectory)/$(AssemblyName)"
+		/>
+	</Target>
+</Project>
