@@ -3,10 +3,21 @@
 		https://docs.microsoft.com/en-US/visualstudio/msbuild/walkthrough-creating-an-msbuild-project-file-from-scratch?view=vs-2019
 	-->
 	<PropertyGroup>
-		<Configuration Condition="'$(Configuration)' == ''">Debug</OutputPath>
+		<Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
 		<OutputPath Condition="'$(OutputPath)' == ''">bin/$(Configuration)</OutputPath>
 		<OutputType>Library</OutputType>
 		<AssemblyName>network.dll</AssemblyName>
+		<DefineConstants>TRACE</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+	  <DebugType>pdbonly</DebugType>
+	  <Optimize>true</Optimize>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)' == 'Debug'">
+	  <DebugType>full</DebugType>
+	  <Optimize>false</Optimize>
+	  <DebugSymbols>true</DebugSymbols>
+	  <DefineConstants>DEBUG;$(DefineConstants)</DefineConstants>
 	</PropertyGroup>
 	<ItemGroup>
 		<Compile Include="src/*.cs" />
