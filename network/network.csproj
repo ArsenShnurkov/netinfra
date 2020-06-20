@@ -10,12 +10,12 @@
 		<DefineConstants>TRACE</DefineConstants>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-	  <DebugType>pdbonly</DebugType>
 	  <Optimize>true</Optimize>
+	  <DebugType>pdbonly</DebugType>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug'">
-	  <DebugType>full</DebugType>
 	  <Optimize>false</Optimize>
+	  <DebugType>full</DebugType>
 	  <DebugSymbols>true</DebugSymbols>
 	  <DefineConstants>DEBUG;$(DefineConstants)</DefineConstants>
 	</PropertyGroup>
@@ -23,12 +23,16 @@
 		<Compile Include="src/*.cs" />
 	</ItemGroup>
 	<Target Name="Build">
-		<MakeDir Directories="$(OutputDirectory)"/>
+		<MakeDir Directories="$(OutputPath)"/>
 		<Csc
 			ToolPath="$(CscToolPath)"
+			DefineConstants="$(DefineConstants)"
 			Sources="@(Compile)"
 			TargetType="$(OutputType)"
 			OutputAssembly="$(OutputPath)/$(AssemblyName)"
+			Optimize="$(Optimize)"
+			DebugType="$(DebugType)"
+			EmitDebugInformation="$(DebugSymbols)"
 		/>
 	</Target>
 </Project>
